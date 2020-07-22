@@ -34,6 +34,8 @@ function setup(){
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+    //print("resize to "+windowWidth)
+    //print("cx is "+cx)
     
     let radius = min(width, height) / 2.5;
     secondsRadius = radius * 0.71;
@@ -47,6 +49,7 @@ function windowResized() {
 
 function draw() {
     background(230);
+    
 
     // Draw the clock background
     noStroke();
