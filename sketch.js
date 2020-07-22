@@ -11,8 +11,13 @@ let hoursRadius;
 let clockDiameter;
 
 var hourimg;
-let minuteimg;
+var minuteimg;
 var clockface;
+
+let csize;
+
+let hrx, hry;
+let mnx, mny;
 
 function preload(){
     hourimg = loadImage('assets/c1.png');
@@ -33,6 +38,8 @@ function windowResized() {
     
     cx = width / 2;
     cy = height / 2;
+    
+    csize = radius/2.5;
 }
 
 
@@ -49,6 +56,8 @@ function setup() {
 
     cx = width / 2;
     cy = height / 2;
+    
+    csize = radius/2.5;
 }
 
 function draw() {
@@ -56,10 +65,13 @@ function draw() {
 
   // Draw the clock background
   noStroke();
-  fill(244, 122, 158);
-  ellipse(cx, cy, clockDiameter + 25, clockDiameter + 25);
-  fill(237, 34, 93);
-  ellipse(cx, cy, clockDiameter, clockDiameter);
+  //fill(244, 122, 158);
+  //ellipse(cx, cy, clockDiameter + 25, clockDiameter + 25);
+  //fill(237, 34, 93);
+  //ellipse(cx, cy, clockDiameter, clockDiameter);
+  
+  image(clockface,cx-clockDiameter/2,cy-clockDiameter/2,clockDiameter,clockDiameter)
+  
 
   // Angles for sin() and cos() start at 3 o'clock;
   // subtract HALF_PI to make them start at the top
@@ -68,13 +80,26 @@ function draw() {
   let h = map(hour() + norm(minute(), 0, 60), 0, 24, 0, TWO_PI * 2) - HALF_PI;
 
   // Draw the hands of the clock
-  stroke(255);
-  strokeWeight(1);
-  line(cx, cy, cx + cos(s) * secondsRadius, cy + sin(s) * secondsRadius);
-  strokeWeight(2);
-  line(cx, cy, cx + cos(m) * minutesRadius, cy + sin(m) * minutesRadius);
-  strokeWeight(4);
-  line(cx, cy, cx + cos(h) * hoursRadius, cy + sin(h) * hoursRadius);
+  stroke(50);
+  //strokeWeight(1);
+  //line(cx, cy, cx + cos(s) * secondsRadius, cy + sin(s) * secondsRadius);
+  strokeWeight(6);
+  mnx = cx + cos(m) * minutesRadius;
+  mny = cy + sin(m) * minutesRadius;
+  line(cx, cy, mnx, mny);
+  strokeWeight(9);
+  hrx = cx + cos(h) * hoursRadius;
+  hry = cy + sin(h) * hoursRadius;
+  line(cx, cy, hrx, hry);
+  
+  
+  //Draw characters
+  
+  //csize
+  image(minuteimg,mnx-csize/2,mny-csize/2,csize,csize)
+  image(hourimg,hrx-csize/2,hry-csize/2,csize,csize)
+  
+  
 
   // Draw the minute ticks
   strokeWeight(2);
@@ -86,6 +111,10 @@ function draw() {
     vertex(x, y);
   }
   endShape();
+  
+  
+  stroke(0);
+  fill(255);
   text("cx, cy: "+cx+", "+cy,width-150,height-50)
   text("width, height: "+width+", "+height,width-150,height-70)
 }
