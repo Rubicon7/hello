@@ -8,11 +8,21 @@ let minutesRadius;
 let hoursRadius;
 let clockDiameter;
 
+let hourimg, minuteimg;
+let clockface;
+
+function preload(){
+    hourimg = loadImage('assets/c1.png');
+    minuteimg = loadImage('assets/c2.png');
+    clockface = loadImage('assets/cface.png');
+}
+
+
 function setup(){
     var cnv = createCanvas(windowWidth, windowHeight);
     cnv.style('display','block');
     stroke(255);
-    let radius = min(width, height) / 2;
+    let radius = min(width, height) / 2.5;
     secondsRadius = radius * 0.71;
     minutesRadius = radius * 0.6;
     hoursRadius = radius * 0.5;
@@ -56,9 +66,19 @@ function draw() {
     strokeWeight(1);
     line(cx, cy, cx + cos(s) * secondsRadius, cy + sin(s) * secondsRadius);
     strokeWeight(2);
-    line(cx, cy, cx + cos(m) * minutesRadius, cy + sin(m) * minutesRadius);
+    
+    let minposx, minposy;
+    minposx = cx + cos(m) * minutesRadius;
+    minposy = cy + sin(m) * minutesRadius;
+    
+    line(cx, cy, minposx, minposy);
     strokeWeight(4);
-    line(cx, cy, cx + cos(h) * hoursRadius, cy + sin(h) * hoursRadius);
+    
+    let hrposx, hrposy;
+    hrposx = cx = cos(h) * hoursRadius;
+    hrposy = cy + sin(h) * hoursRadius;
+    
+    line(cx, cy, hrposx, hrposy);
 
     // Draw the minute ticks
     strokeWeight(2);
