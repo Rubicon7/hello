@@ -46,6 +46,8 @@ function windowResized() {
 function setup() {
     var cnv = createCanvas(windowWidth, windowHeight);
     cnv.style('display','block');
+    
+    frameRate(1);
 
 
     let radius = min(width, height) / 2.5;
