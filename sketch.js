@@ -86,4 +86,6 @@ function draw() {
     vertex(x, y);
   }
   endShape();
+  text("cx, cy: "+cx+", "+cy,width-150,height-50)
+  text("width, height: "+width+", "+height,width-150,height-70)
 }
